@@ -1,0 +1,188 @@
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <meta name="description" content="The small framework with powerful features">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/img/logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" type="text/css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" type="text/css">
+
+   <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap-datepicker.min.css') }}" type="text/css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='Datatable/datatable.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap-datepicker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/jquery.timepicker.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fonts/flaticon/flaticon.css') }}">
+
+ <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/datatables.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/chosen.css') }}" type="text/css">
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.blue.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/sweetalert2.css') }}">
+    <style>
+        .telthemweb{
+           color:#0D5B40!important;
+        }
+        .telthemweb-nav{background-color:#0D5B40!important;}
+    </style>
+
+</head>
+<body>
+      <header class="header" id="myHeader">
+        <nav class="navbar navbar-expand-lg px-4 py-2 bg-white shadow"><a href="/dashboard" class="sidebar-toggler text-light-500 mr-4 mr-lg-5 lead"><img src="{{ url_for('static', filename='assets/img/logo.png') }}" class="img-fluid"  width="80"></a>
+            <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
+
+
+                <li class="nav-item dropdown ml-auto">
+                    <a id="userInfo" href="/logout" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <img src="{{ url_for('static', filename='assets/img/avatar.png') }}" alt="Profile Picture" style="max-width: 2.5rem;" class="img-fluid rounded-circle shadow">
+                    </a>
+                    <div aria-labelledby="userInfo" class="dropdown-menu">
+                        <a href="/profile" class="dropdown-item">
+                            <strong class="d-block text-uppercase headings-font-family" id="flname">
+                                <span><i class="fa fa-user"></i> {{session['name']}} {{session['surname']}}</span>
+                            </strong>
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+                        <a href="/profile" class="dropdown-item"><i class="fa fa-cog"></i> My Profile</a>
+
+                        <div class="dropdown-divider"></div><a href="/logout" class="dropdown-item"><i class="fa fa-sign-out-alt"></i> Logout</a>
+
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <div class="d-flex align-items-stretch">
+        <div id="sidebar" class="sidebar telthemweb-nav py-3">
+            <div class="text-light text-uppercase px-3 px-lg-4 py-4 font-weight-bold small headings-font-family">MY DASHBOARD</div><hr>
+            <ul class="sidebar-menu list-unstyled">
+
+                {% if session['role_id']==1 %}
+                    <li class="sidebar-list-item dropdown">
+                        <a href="#" class="sidebar-link text-white nav-linkdropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-cogs mr-3 text-white"></i><span>CONFIGURATIONS</span></a>
+                    </li>
+                    <li class="sidebar-list-item ">
+                        <a href="/roles" class="sidebar-link text-white nav-link">
+                            <i class="fa fa-lock mr-3 text-light"></i><span>ROLES</span></a>
+                    </li>
+                    <li class="sidebar-list-item ">
+                        <a href="/users" class="sidebar-link text-white nav-link">
+                            <i class="fa fa-users mr-3 text-light"></i><span>SYSTEM USERS</span></a>
+                    </li>
+             {% endif %}
+
+
+
+
+                <li class="sidebar-list-item dropdown">
+                    <a href="#" class="sidebar-link text-white nav-linkdropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-briefcase mr-3 text-white"></i><span>FARM MANAGEMENT</span></a>
+                </li>
+                <li class="sidebar-list-item ">
+                    <a href="/deseases" class="sidebar-link text-white nav-link">
+                        <i class="fa fa-bug mr-3 text-light"></i><span>DESEASES</span></a>
+                </li>
+
+               <li class="sidebar-list-item dropdown">
+                    <a href="#" class="sidebar-link text-white nav-linkdropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-briefcase mr-3 text-white"></i><span>REPORTS</span></a>
+                </li>
+                {% if session['role_id']==1 %}
+                    <li class="sidebar-list-item ">
+                        <a href="/audit-trail" class="sidebar-link text-white nav-link">
+                            <i class="fa fa-tasks mr-3 text-light"></i><span>AUDIT REPORT</span></a>
+                    </li>
+                <li class="sidebar-list-item ">
+                        <a href="/systemlogs" class="sidebar-link text-white nav-link">
+                            <i class="fa fa-tasks mr-3 text-light"></i><span>SYSTEM LOGS </span></a>
+                    </li>
+                {%endif%}
+                <li class="sidebar-list-item ">
+                        <a href="/deseaselogs" class="sidebar-link text-white nav-link">
+                            <i class="fa fa-tasks mr-3 text-light"></i><span>DESEASE REPORT</span></a>
+                    </li>
+
+
+                <p class="mb-5"></p>
+                <li class="sidebar-list-item bg-red text-white">
+                    <a href="/logout" class="sidebar-link text-muted nav-link ">
+                        <i class="fa fa-sign-out-alt mr-3 text-light text-white"></i><span class="text-white">LOGOUT</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5 mt-lg-5">
+            <ol class="breadcrumb" style="margin-bottom: 5px;">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">{{title}}</a></li>
+            </ol>
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category,message in messages %}
+                              {% if category=='error' %}
+                                    <div class="alert alert-danger text-center" role="alert">
+                                        <strong>{{message}} </strong>
+                                        <button type="button" data-dismiss="alert" class="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-success text-center" role="alert">
+                                        <strong>{{message}} </strong>
+                                        <button type="button" data-dismiss="alert" class="close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                               {% endif%}
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                </div>
+             </div>
+            <div class="row">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    </div>
+<script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery-migrate-3.0.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.cookie/jquery.cookie.js') }}"> </script>
+<script src="{{ url_for('static', filename='assets/js/jquery.easing.1.3.js') }}"></script>
+<script src="{{ url_for('static', filename='Datatable/datatable.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/jquery.waypoints.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.stellar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/owl.carousel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.animateNumber.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/bootstrap-datepicker.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.timepicker.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/scrollax.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/all.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/jquery.datatables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/datatables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/chart.js/chart.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/sweetalert2.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#myTable").DataTable()
+    });
+</script>
+</body>
+</html>

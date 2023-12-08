@@ -1,0 +1,98 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<div class="col-12 col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header bg-success text-light">
+                    <h3>Deseases List
+                        {% if session['role_id']==1 %}
+                            <Button class="btn btn-danger float-right" type="button" data-toggle="modal" data-target="#user-form-modal">Add Desease <i class="fa fa-plus ml-3 text-green"></i></Button>
+                         {% endif %}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="myTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for desease in deseases %}
+                                            <tr>
+                                                 <td><img src="{{ url_for('static', filename='uploads') }}/{{desease['imageurl']}}" class="img-fluid rounded-0"  width="25"></td>
+                                                <td>{{desease['name']}}</td>
+                                                <td>
+                                                    {% if session['role_id']==1 %}
+                                                        <a class="text-success" href="/desease/show/{{desease['id']}}">
+                                                            <i class="fa fa-edit mr-3 text-green"></i>
+                                                        </a>
+                                                        <a style="cursor:pointer" class="text-danger" href="/desease/delete/{{desease['id']}}"><i class="fa fa-trash mr-3 text-danger"></i> </a>
+                                                        <a style="cursor:pointer" class="text-info" href="/desease/recommendation/{{desease['id']}}"><i class="fa fa-eye mr-3 text-danger"></i> </a>
+                                                    {%else %}
+                                                        <a class="btn btn-danger text-light" href="/desease/show/{{desease['id']}}">
+                                                            View <i class="fa fa-eye text-light"></i>
+                                                        </a>
+                                                    {% endif %}
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="user-form-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white">CREATE DESEASE</h5>
+                <button class="close text-white" data-dismiss="modal">
+                    <span aria-hidden="true">X</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-1">
+                    <form action="/adddesease" method="POST"  enctype = "multipart/form-data">
+
+                        <div class="form-group">
+                            <div class="rounded">
+                                <input type="text" class="form-control pl-3  rounded-0" name="name" required placeholder="Desease Name" id="name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="rounded">
+                                <textarea type="text" class="form-control pl-3 rounded-0" name="systoms" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        <label class="">Upload a leaf image</label>
+                        <input type="file" name="maizefile" class="form-control border-0">
+                    </div>
+
+                        <div class="float-lg-right">
+                            <div class="">
+                                <button type="submit" class="btn btn-success login-btn btn-block">SAVE <i class="fa fa-save ml-2 text-light"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

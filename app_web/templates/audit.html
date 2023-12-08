@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="col-lg-12">
+                    <div id="switchPoint" class="e-panel card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h6 class="mr-2"><span>SYSTEM AUDIT</span><small class="px-1"></small></h6>
+                            </div>
+                            <div class="e-table">
+                                <div class="table-responsive table-lg mt-3">
+                                    <table class="table table-bordered" id="myTable">
+                                        <thead>
+                                        <tr>
+                                            <th class="max-width">Creator</th>
+                                             <th class="max-width">Entity</th>
+                                            <th class="max-width">Old value</th>
+                                            <th class="max-width">New value</th>
+                                            <th class="max-width">Date</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                        </thead>
+                                         <tbody id="role">
+                                        {% if audits %}
+                                        {% for log in audits %}
+                                            <tr>
+                                                <td>{{log.trailedby.name}}  {{log.trailedby.surname}}</td>
+                                                <td>{{log.entity}}</td>
+                                                <td>{{log.oldvalue}}</td>
+                                                <td>{{log.newvalue}}</td>
+                                                <td>{{log.created_at}}</td>
+                                                <td>{{log.action}}</td>
+
+
+                                            </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <td colspan="6" class="text-danger text-center"><b>No audits found</b></td>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}

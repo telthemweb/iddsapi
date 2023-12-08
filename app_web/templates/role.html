@@ -1,0 +1,82 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+	<div class="col-12 col-sm-12 col-md-12">
+		<div class="card">
+			<div class="card-header bg-success text-white">System Roles <button class="btn btn-secondary float-right rounded-0" data-toggle="modal" data-target="#user-form-modal">
+                        New Role <i class="fa fa-user-cog"></i>
+                    </button></div>
+			<div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped" id="myTable">
+                                        <thead>
+                                            <tr>
+
+                                                <th>Name</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% for role in roles %}
+
+                                            <tr>
+
+                                                <td>{{role['name']}}</td>
+                                                <td>
+                                                    <a class="text-success" href="/role/{{role['id']}}">
+                                                        <i class="fa fa-edit mr-3 text-green"></i>
+                                                    </a>
+                                                    <a class="text-danger" href="role/delete/{{role['id']}}"><i class="fa fa-trash mr-3 text-danger"></i> </a>
+
+                                                </td>
+                                            </tr>
+                                           {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+		</div>
+
+
+<div class="modal fade" role="dialog" tabindex="-1" id="user-form-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white">CREATE ROLE</h5>
+                <button class="close text-white" data-dismiss="modal">
+                    <span aria-hidden="true">X</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-1">
+                    <form action="/addrole" method="POST">
+
+                        <div class="form-group">
+                            <div class="rounded">
+                                <input type="text" class="form-control pl-3" name="name" placeholder="Role Name" required="required" id="name">
+                            </div>
+                        </div>
+
+                        <div class="float-lg-right">
+                            <div class="">
+                                <button type="submit" class="btn btn-success login-btn btn-block">SUBMIT</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+{% endblock %}

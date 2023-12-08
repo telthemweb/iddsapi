@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+  		<div class="col-md-12">
+  			<div class="card">
+            <div class="card-body">
+                <h5 class="card-title" id="f_name"><b>Name </b>: <b class="float-right">{{session['name']}} {{session['surname']}}</b></h5>
+
+                <div class="dropdown-divider mb-lg-5"></div>
+                <p class="heading2" id="phone"><b>Phone Number</b><b class="float-right">{{session['phone']}}</b></p>
+                <div class="dropdown-divider mb-lg-5"></div>
+                <p class="heading2" id="email"><b>E-mail Address:</b><b class="float-right">{{session['email']}}</b></p>
+                <div class="dropdown-divider mb-lg-5"></div>
+                <p class="heading2" id="gender"><b>Gender:</b><b class="float-right">{{session['gender']}}</b></p>
+                <div class="dropdown-divider mb-lg-5"></div>
+                <p class="heading2" id="city"><b>City/Town:</b><b class="float-right">{{session['city']}}</b></p>
+                <div class="dropdown-divider mb-lg-5"></div>
+                <p class="heading2" id="address"><b>Physical Address:</b><b class="float-right">{{session['address']}}</b></p>
+
+            </div>
+            <div class="card-footer text-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-red float-right rounded-0  text-white" data-toggle="modal" data-target="#user-form-modal" data-toggle="tooltip" title="delete" >Change Password</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+  		</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="user-form-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white">CHANGE PASSWORD</h5>
+                <button  class="close text-white" data-dismiss="modal">
+                    <span aria-hidden="true">X</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-1">
+                <form action="/changepassword" method="POST">
+                            <div class="form-group">
+                                <div class="rounded">
+                                    <input type="text" class="form-control pl-3" name="newpassword"
+                                        required="required" placeholder="New Password">
+                                    <input type="hidden" name="userid" value="{{session['id']}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="rounded">
+                                    <input type="text" class="form-control pl-3" name="cnewpassword"
+                                        required="required" placeholder="Confirm New Password">
+                                </div>
+                            </div>
+                            <div class="float-lg-right">
+                                <div class="">
+                                    <button type="submit" class="btn btn-danger login-btn btn-block">SUBMIT</button>
+                                </div>
+                            </div>
+                        </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

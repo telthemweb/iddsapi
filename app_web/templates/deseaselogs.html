@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="col-lg-12">
+                    <div id="switchPoint" class="e-panel card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h6 class="mr-2"><span>DESEASE REPORT LOGS</span> <a href="/export_excel" class="btn btn-danger float-right">Export <i class="fa fa-file-excel"></i></a><small class="px-1"></small></h6>
+                            </div>
+                            <div class="e-table">
+                                <div class="table-responsive table-lg mt-3">
+                                    <table class="table table-bordered" id="myTable">
+                                        <thead>
+                                        <tr>
+                                            <th class="max-width">Name</th>
+                                            <th class="max-width">Country</th>
+                                            <th class="max-width">City</th>
+                                            <th class="text-center">Province</th>
+                                            <th class="text-center">District</th>
+                                            <th class="text-center">Account</th>
+                                            <th class="max-width">Geolocation</th>
+                                            <th class="text-center">Date</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="role">
+                                        {% if deseases %}
+                                        {% for desease in deseases %}
+                                            <tr>
+                                                <td>{{desease.deseaselog.name}}</td>
+                                                <td>{{desease.country}}</td>
+                                                <td>{{desease.city}}</td>
+                                                <td>{{desease.province}}</td>
+                                                <td>{{desease.district}}</td>
+                                                <td>{{desease.useaccountname}}</td>
+                                                <td>{{desease.geolocationap}}</td>
+                                                <td>{{ desease.created_at.strftime('%d-%m-%Y') }}</td>
+
+
+                                            </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <td colspan="6" class="text-danger text-center"><b>No logs found</b></td>
+                                        {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+{% endblock %}

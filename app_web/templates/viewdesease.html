@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="col-md-12">
+		<div class="card">
+			<div class="card-header bg-success text-white">Recommendations
+                {% if session['role_id']==1 %}
+				{% if recom ==None %}
+				<button class="btn btn-secondary float-right rounded-0" data-toggle="modal" data-target="#user-form-modal">New Recommendation <i class="fa fa-user-cog"></i>
+                    </button>
+                    {% else %}
+                    <button class="btn btn-danger float-right rounded-0" >Recommendated <i class="fa fa-check"></i></button>
+                  {% endif %}
+                 {% endif %}
+                </div>
+			<div class="card-body">
+				{% if recom !=None %}
+				<p>{{recom['recommendationmessage']}}</p>
+				{% else %}
+				<p class="text-center"><b class="text-danger text-center">NO RECOMMANDATION YET</b></p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+
+
+<div class="modal fade" role="dialog" tabindex="-1" id="user-form-modal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h5 class="modal-title text-white">ADD RECOMMENDATION</h5>
+                <button class="close text-white" data-dismiss="modal">
+                    <span aria-hidden="true">X</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-1">
+                     <form action="/addRecom" method="POST">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control pl-3  rounded-0" name="desease_Id" value="{{desease_Id}}">
+
+                            <div class="rounded">
+                                <label>Desease Recommendation</label>
+                                <textarea type="text" class="form-control pl-3 rounded-0" name="recommendationmessage" rows="8" style="resize: none;"></textarea>
+                            </div>
+                        </div>
+                        <div class="float-lg-right">
+                            <div class="">
+                                <button type="submit" class="btn btn-success login-btn btn-block">SAVE <i class="fa fa-save ml-2 text-light"></i></button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
